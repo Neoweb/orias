@@ -1,5 +1,10 @@
-require "bundler/setup"
-require "orias"
+require 'bundler/setup'
+require 'orias'
+require 'simplecov'
+require 'simplecov-console'
+
+SimpleCov.formatter = SimpleCov::Formatter::Console
+SimpleCov.start
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

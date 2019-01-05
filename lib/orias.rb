@@ -1,4 +1,4 @@
-require "orias/version"
+require 'orias/version'
 
 module Orias
   # Your code goes here...
