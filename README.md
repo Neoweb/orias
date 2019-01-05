@@ -1,6 +1,7 @@
 # Orias
 
 
+[![Gem Version](https://badge.fury.io/rb/orias.svg)](https://badge.fury.io/rb/orias)
 [![Build Status](https://travis-ci.org/01max/orias.svg?branch=master)](https://travis-ci.org/01max/orias)
 [![Maintainability](https://api.codeclimate.com/v1/badges/634c92245aefc4bba229/maintainability)](https://codeclimate.com/github/01max/orias/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/634c92245aefc4bba229/test_coverage)](https://codeclimate.com/github/01max/orias/test_coverage)
