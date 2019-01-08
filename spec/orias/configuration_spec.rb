@@ -1,4 +1,4 @@
-RSpec.describe Orias::Configuration, type: :module do
+RSpec.describe Orias::Configuration, type: :class do
   describe '#private_key' do
     it 'has a default value of "nil"' do
       config = Orias::Configuration.new

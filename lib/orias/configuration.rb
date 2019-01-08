@@ -1,11 +1,11 @@
 module Orias
   # Dedicated to configuration management
-  class Configuration
+  class Configuration < Base
     attr_accessor :private_key
 
     # Initialize an Orias::Configuration instance
-    def initialize
-      @private_key = nil
+    def initialize(attributes = {})
+      super
     end
   end
 end

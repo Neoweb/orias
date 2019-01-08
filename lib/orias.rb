@@ -1,5 +1,7 @@
+require 'orias/base'
 require 'orias/version'
 require 'orias/configuration'
+require 'orias/request'
 
 # Top-level of the orias ruby gem.
 #
