@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'orias'
+require 'faker'
 require 'simplecov'
 require 'simplecov-console'
 
