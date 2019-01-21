@@ -2,19 +2,21 @@ require 'net/http'
 
 module Orias
   # Dedicated to request handling to ORIAS API
+  #
   class Request < Base
     attr_reader :post
-    attr_accessor :base_url, :body
+    attr_accessor :api_endpoint, :body
 
     # Initialize an Orias::Request instance
     def initialize(attributes = {})
       super
-      @base_url ||= 'https://ws.orias.fr/service?wsdl'
+      @api_endpoint ||= Orias.configuration.api_endpoint
+      @private_key ||= Orias.configuration.private_key
     end
 
     # Build the request to be sent
     def build!
-      @post = Net::HTTP::Post.new(@base_url)
+      @post = Net::HTTP::Post.new(@api_endpoint)
       @post.body = @body
       @post['Content-Type'] = 'application/xml'
 

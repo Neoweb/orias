@@ -1,9 +1,9 @@
 RSpec.describe Orias::Request, type: :class do
-  describe '#base_url' do
+  describe '#api_endpoint' do
     it 'has a default value' do
       request = Orias::Request.new
 
-      expect(request.base_url).to_not eq(nil)
+      expect(request.api_endpoint).to_not eq(nil)
     end
   end
 

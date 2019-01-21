@@ -62,7 +62,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.16)
-  faker
+  faker (~> 1.9)
   orias!
   rake (~> 10.0)
   rspec (~> 3.0)

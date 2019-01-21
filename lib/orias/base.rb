@@ -1,5 +1,6 @@
 module Orias
   # Base Orias class
+  #
   class Base
     def initialize(attributes = {})
       _assign_attributes(attributes)
