@@ -6,6 +6,7 @@ module Orias
   class Request < Base
     attr_reader :post
     attr_accessor :api_endpoint, :body
+    attr_writer :private_key
 
     # Initialize an Orias::Request instance
     def initialize(attributes = {})
@@ -16,7 +17,7 @@ module Orias
 
     # Build the request to be sent
     def build!
-      @post = Net::HTTP::Post.new(@api_endpoint)
+      @post = Net::HTTP::Post.new(URI(@api_endpoint))
       @post.body = @body
       @post['Content-Type'] = 'application/xml'
 
