@@ -6,13 +6,11 @@ module Orias
   class Request < Base
     attr_reader   :http, :post, :uri
     attr_accessor :api_endpoint, :body
-    attr_writer   :private_key
 
     # Initialize an Orias::Request instance
     def initialize(attributes = {})
       super
       @api_endpoint ||= Orias.configuration.api_endpoint
-      @private_key ||= Orias.configuration.private_key
     end
 
     # Build the request to be sent

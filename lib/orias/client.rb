@@ -1,5 +1,3 @@
-require 'net/http'
-
 module Orias
   # Dedicated to request handling to ORIAS API
   #
@@ -12,16 +10,6 @@ module Orias
       super
       @api_endpoint ||= Orias.configuration.api_endpoint
       @private_key ||= Orias.configuration.private_key
-    end
-
-    # Build a new Request
-    def build_request
-      request = Orias::Request.new(
-        api_endpoint: @api_endpoint,
-        private_key: @private_key
-      )
-
-      request.build!
     end
   end
 end
