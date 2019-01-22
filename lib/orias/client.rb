@@ -15,7 +15,7 @@ module Orias
     end
 
     # Build a new Request
-    def build_request!
+    def build_request
       request = Orias::Request.new(
         api_endpoint: @api_endpoint,
         private_key: @private_key

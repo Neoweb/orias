@@ -1,18 +1,34 @@
 RSpec.describe Orias::Request, type: :class do
   describe '#build!' do
-    it 'define the #post value' do
-      request = Orias::Request.new
-      request.build!
+    endpoint = Faker::Internet.url
+    uri_endpoint = URI(endpoint)
+    request = Orias::Request.new(api_endpoint: endpoint)
+    request.build!
 
+    it 'define the #post value' do
       expect(request.post).to_not eq(nil)
     end
 
     it 'uses the correct api_endpoint' do
-      expected_endpoint = Faker::Internet.url
-      request = Orias::Request.new(api_endpoint: expected_endpoint)
-      request.build!
+      expect(request.post.uri.to_s).to eq(endpoint)
+    end
 
-      expect(request.post.uri.to_s).to eq(expected_endpoint)
+    it 'set a correct value for #uri' do
+      expect(request.uri).to eq(uri_endpoint)
+    end
+  end
+
+  describe '#response' do
+    context 'when #body is valid' do
+    end
+
+    context 'when #body is empty' do
+      request = Orias::Request.new(body: nil)
+      response = request.response
+
+      it 'returns an HTTPInternalServerError' do
+        expect(response).to be_a_kind_of(Net::HTTPInternalServerError)
+      end
     end
   end
 end
