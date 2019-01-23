@@ -1,3 +1,5 @@
+require 'libxml_to_hash'
+
 module Orias
   # Dedicated to search request building
   #
@@ -24,18 +26,24 @@ module Orias
 
     # Request building for intermediarySearchRequest
     def find_by(type, terms)
-      Orias::Request.new(
+      request = Orias::Request.new(
         api_endpoint: @client.api_endpoint,
         body: raw_find(raw_intermediaries(type, terms))
       ).build!
+
+      hash_response = Hash.from_libxml(request.response.body)
+
+      imds_hash = hash_response['Envelope']['Body']
+      imds_hash = imds_hash['intermediarySearchResponse']['intermediaries']
+      imds_hash['intermediary']
     end
 
     # Build the raw request body of a search
-    def raw_body(body_content)
+    def raw_body(content)
       xmlns_url = 'http://schemas.xmlsoap.org/soap/envelope/'
 
       output = "<soapenv:Envelope xmlns:soapenv=\"#{xmlns_url}\">"
-      output += "<soapenv:Body>#{body_content}</soapenv:Body>"
+      output += "<soapenv:Body>#{content}</soapenv:Body>"
       output + '</soapenv:Envelope>'
     end
 
@@ -54,7 +62,7 @@ module Orias
       raise 'Orias::Search - You must at least submit one term.' if terms.empty?
 
       type = Search.set_type(type, terms)
-      Search.check_terms(type, terms)
+      terms = Search.set_terms(type, terms)
 
       terms.flatten.uniq.compact.map do |term|
         "<intermediary><#{type}>#{term}</#{type}></intermediary>\n"
@@ -77,8 +85,9 @@ module Orias
         VALID_INTERMEDIARIES_TYPE.invert[lgts.first]
       end
 
-      # Check an intermediaries list
-      def check_terms(type, terms)
+      # Check & Set an intermediaries list
+      def set_terms(type, terms)
+        terms.map!{ |t| t.gsub(/\D/,'') }
         lgts = terms.map(&:length).uniq
         valid_lgth = VALID_INTERMEDIARIES_TYPE[type]
 
@@ -86,7 +95,7 @@ module Orias
           raise "Terms for \"#{type}\" must all have a length of #{valid_lgth}."
         end
 
-        true
+        terms
       end
     end
   end
