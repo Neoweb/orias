@@ -2,8 +2,7 @@ module Orias
   # Dedicated to request handling to ORIAS API
   #
   class Client < Base
-    attr_accessor :api_endpoint
-    attr_writer :private_key
+    attr_accessor :api_endpoint, :private_key
 
     # Initialize an Orias::Client instance
     def initialize(attributes = {})

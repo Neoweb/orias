@@ -3,6 +3,7 @@ require 'orias/version'
 require 'orias/configuration'
 require 'orias/request'
 require 'orias/client'
+require 'orias/search'
 
 # Top-level of the orias ruby gem.
 #
