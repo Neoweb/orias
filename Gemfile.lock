@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    orias (0.1.0)
+    orias (0.2.0)
       libxml-to-hash
 
 GEM

@@ -15,12 +15,12 @@ module Orias
     end
 
     # Alias for #find_by with an :orias type
-    def find_by_orias(*terms)
+    def find_by_orias(terms)
       find_by(:orias, terms)
     end
 
     # Alias for #find_by with an :siren type
-    def find_by_siren(*terms)
+    def find_by_siren(terms)
       find_by(:siren, terms)
     end
 
@@ -28,7 +28,7 @@ module Orias
     def find_by(type, terms)
       request = Orias::Request.new(
         api_endpoint: @client.api_endpoint,
-        body: raw_find(raw_intermediaries(type, terms))
+        body: raw_find(raw_intermediaries(type, terms.to_a))
       ).build!
 
       Orias::Response.new(
@@ -86,7 +86,7 @@ module Orias
 
       # Check & Set an intermediaries list
       def set_terms(type, terms)
-        terms.map!{ |t| t.gsub(/\D/,'') }
+        terms.map!{ |t| t.to_s.gsub(/\D/,'') }
         lgts = terms.map(&:length).uniq
         valid_lgth = VALID_INTERMEDIARIES_TYPE[type]
 
