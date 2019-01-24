@@ -28,7 +28,7 @@ module Orias
     def find_by(type, terms)
       request = Orias::Request.new(
         api_endpoint: @client.api_endpoint,
-        body: raw_find(raw_intermediaries(type, terms.to_a))
+        body: raw_find(raw_intermediaries(type, [terms].flatten))
       ).build!
 
       Orias::Response.new(

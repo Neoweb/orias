@@ -71,6 +71,7 @@ module Orias
     def process_intermediary_search!
       results_hash = self.raw_hash_response['intermediarySearchResponse']
       results_hash = results_hash['intermediaries']['intermediary']
+      results_hash = [results_hash].flatten
 
       @results = results_hash.map do |h|
         Orias::Intermediary.new(h)
