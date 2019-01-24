@@ -4,6 +4,10 @@ require 'orias/configuration'
 require 'orias/request'
 require 'orias/client'
 require 'orias/search'
+require 'orias/response'
+require 'orias/intermediary'
+require 'orias/registration'
+require 'orias/mandator'
 
 # Top-level of the orias ruby gem.
 #

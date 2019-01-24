@@ -31,11 +31,10 @@ module Orias
         body: raw_find(raw_intermediaries(type, terms))
       ).build!
 
-      hash_response = Hash.from_libxml(request.response.body)
-
-      imds_hash = hash_response['Envelope']['Body']
-      imds_hash = imds_hash['intermediarySearchResponse']['intermediaries']
-      imds_hash['intermediary']
+      Orias::Response.new(
+        type: :intermediary_search,
+        raw_response: request.response.body
+      )
     end
 
     # Build the raw request body of a search
