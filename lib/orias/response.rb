@@ -14,6 +14,25 @@ module Orias
       self.process_raw_response!
     end
 
+    def found
+      return found_intermediaries if @type == :intermediary_search
+      []
+    end
+
+    def not_found
+      return found_intermediaries(false) if @type == :intermediary_search
+      []
+    end
+
+    def found_intermediaries(v = true)
+      @results.select do |result|
+        result.found == v
+      end
+    end
+
+    class << self
+    end
+
     protected
 
     def process_raw_response!
@@ -37,9 +56,6 @@ module Orias
       end
 
       self
-    end
-
-    class << self
     end
   end
 end
