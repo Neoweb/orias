@@ -25,6 +25,10 @@ module Orias
       end
     end
 
+    def registration_number
+      orias
+    end
+
     private
 
     class << self
