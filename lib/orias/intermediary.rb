@@ -29,6 +29,18 @@ module Orias
       orias
     end
 
+    def subscribed
+      !registrations_with_status('INSCRIT').empty?
+    end
+
+    # Scopes & collections
+
+    def registrations_with_status(status_value)
+      @registrations.select do |registration|
+        registration.status == status_value
+      end
+    end
+
     private
 
     class << self

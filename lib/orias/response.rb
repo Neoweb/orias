@@ -14,16 +14,31 @@ module Orias
       self.process_raw_response!
     end
 
-    # Global scopes / collections
+    # Result collections
 
-    def found(found_value = true)
-      return found_intermediaries(found_value) if @type == :intermediary_search
-      []
+    [:found, :subscribed].each do |result_attr|
+
+      define_method("#{result_attr}") do |attr_value = true|
+        if @type == :intermediary_search
+          return send("#{result_attr}_intermediaries".to_sym, attr_value)
+        end
+
+        []
+      end
+
+      define_method("not_#{result_attr}") do
+        return send("#{result_attr}".to_sym, false)
+      end
+
+      define_method("#{result_attr}_intermediaries") do |attr_value = true|
+        return send(:results).select do |result|
+          result.send(result_attr) == attr_value
+        end
+      end
+
     end
 
-    def not_found; return found(false); end
-
-    # Collections methods
+    # Result collections methods
 
     [:found, :not_found].each do |collection|
 
@@ -37,14 +52,6 @@ module Orias
 
       end
 
-    end
-
-    # Intermediaries scopes
-
-    def found_intermediaries(found_value = true)
-      @results.select do |result|
-        result.found == found_value
-      end
     end
 
     protected
