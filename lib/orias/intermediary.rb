@@ -4,6 +4,8 @@ module Orias
   class Intermediary < Base
     attr_accessor :raw, :found, :siren, :orias, :denomination, :registrations
 
+    alias_method :registration_number, :orias
+
     # Initialize an Orias::Intermediary instance
     def initialize(attributes = {})
       @raw = attributes
@@ -25,15 +27,11 @@ module Orias
       end
     end
 
-    def registration_number
-      orias
-    end
-
     def subscribed
       !registrations_with_status('INSCRIT').empty?
     end
 
-    # Scopes & collections
+    # Registrations collections
 
     def registrations_with_status(status_value)
       @registrations.select do |registration|
