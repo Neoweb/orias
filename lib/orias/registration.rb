@@ -13,6 +13,7 @@ module Orias
       @status = @raw.dig('status')
       @subscribed = @status == 'INSCRIT'
       @registration_date = @raw.dig('registrationDate')
+      @deletion_date = @raw.dig('deletionDate')
       @collect_funds = @raw.dig('collectFunds') == 'true'
 
       raw_mandators = @raw.dig('mandators', 'mandator')
