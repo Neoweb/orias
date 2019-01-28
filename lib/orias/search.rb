@@ -26,15 +26,19 @@ module Orias
 
     # Request building for intermediarySearchRequest
     def find_by(type, terms)
-      request = Orias::Request.new(
-        api_endpoint: @client.api_endpoint,
-        body: raw_find(raw_intermediaries(type, [terms].flatten))
-      ).build!
+      responses = [terms].flatten.each_slice(@client.per_request).map do |term_collection|
+        request = Orias::Request.new(
+          api_endpoint: @client.api_endpoint,
+          body: raw_find(raw_intermediaries(type, term_collection))
+        ).build!
 
-      Orias::Response.new(
-        type: :intermediary_search,
-        raw_response: request.response.body
-      )
+        Orias::Response.new(
+          type: :intermediary_search,
+          raw: request.response.body
+        )
+      end
+
+      Orias::Response.merge(responses)
     end
 
     # Build the raw request body of a search

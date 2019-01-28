@@ -6,12 +6,13 @@ module Orias
   class Response < Base
     VALID_TYPES = [:intermediary_search].freeze
 
-    attr_accessor :type, :raw_response, :raw_hash_response, :results
+    attr_accessor :type, :raw, :raw_hash, :results
 
     # Initialize an Orias::Response instance
     def initialize(attributes = {})
       super
-      self.process_raw_response!
+      self.process_raw_response! if results.nil?
+      self.check_type
     end
 
     # Result collections
@@ -54,10 +55,25 @@ module Orias
 
     end
 
+    class << self
+      def merge(instances)
+        if instances.map(&:type).uniq.compact.length != 1
+          raise 'Orias::Response - Error merging Orias::Response collection.'
+        end
+
+        self.new(
+          raw: instances.map(&:raw),
+          raw_hash: instances.map(&:raw_hash),
+          results: instances.map(&:results).flatten,
+          type: instances.map(&:type).uniq.first
+        )
+      end
+    end
+
     protected
 
     def process_raw_response!
-      self.raw_hash_response = Hash.from_libxml(self.raw_response)['Envelope']['Body']
+      self.raw_hash = Hash.from_libxml(self.raw)['Envelope']['Body']
 
       if @type == :intermediary_search
         process_intermediary_search!
@@ -66,14 +82,21 @@ module Orias
       end
     end
 
+    def check_type
+      raise 'Orias::Response - Wrong type.' unless VALID_TYPES.include?(type)
+    end
+
     private
 
     def process_intermediary_search!
-      results_hash = self.raw_hash_response['intermediarySearchResponse']
-      results_hash = results_hash['intermediaries']['intermediary']
-      results_hash = [results_hash].flatten
+      begin
+        results_hash = self.raw_hash['intermediarySearchResponse']
+        results_hash = results_hash['intermediaries']['intermediary']
+      rescue
+        raise 'Orias::Response - API response error.' unless results_hash
+      end
 
-      @results = results_hash.map do |h|
+      @results = [results_hash].flatten.map do |h|
         Orias::Intermediary.new(h)
       end
 
