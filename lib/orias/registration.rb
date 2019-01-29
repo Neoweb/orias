@@ -3,7 +3,7 @@ module Orias
   #
   class Registration < Base
     attr_accessor :raw, :category_name, :status, :subscribed,
-      :registration_date, :collect_funds, :mandators
+      :registration_date, :deletion_date, :collect_funds, :mandators
 
     # Initialize an Orias::Registration instance
     def initialize(attributes = {})
