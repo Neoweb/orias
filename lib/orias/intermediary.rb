@@ -22,21 +22,15 @@ module Orias
         raw_registrations = [raw_registrations]
       end
 
-      @registrations = raw_registrations.compact.map do |h|
+      registrations = raw_registrations.compact.map do |h|
         Orias::Registration.new(h)
       end
+
+      @registrations = Orias::RegistrationCollection.new(registrations)
     end
 
     def subscribed
-      !registrations_with_status('INSCRIT').empty?
-    end
-
-    # Registrations collections
-
-    def registrations_with_status(status_value)
-      @registrations.select do |registration|
-        registration.status == status_value
-      end
+      !@registrations.with_status('INSCRIT').empty?
     end
 
     private
