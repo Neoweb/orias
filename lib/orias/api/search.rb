@@ -25,11 +25,9 @@ module Orias
 
       # Request building for intermediarySearchRequest
       def find_by(type, terms)
-        responses = [terms].flatten.each_slice(@client.per_request).map do |term_collection|
-          request = Orias::Api::Request.new(
-            api_endpoint: @client.api_endpoint,
-            body: raw_find(raw_intermediaries(type, term_collection))
-          ).build!
+        term_collections = [terms].flatten.each_slice(@client.per_request)
+        responses = term_collections.map do |term_collection|
+          request = build_find_request(type, term_collection)
 
           Orias::Api::Response.new(
             type: :intermediary_search,
@@ -38,6 +36,13 @@ module Orias
         end
 
         Orias::Api::Response.merge(responses)
+      end
+
+      def build_find_request(type, term_collection)
+        Orias::Api::Request.new(
+          api_endpoint: @client.api_endpoint,
+          body: raw_find(raw_intermediaries(type, term_collection))
+        ).build!
       end
 
       # Build the raw request body of a search
@@ -51,17 +56,19 @@ module Orias
 
       # Build the raw search request of a search
       def raw_find(raw_intermeds)
-        content = '<intermediarySearchRequest xmlns="urn:gpsa:orias:ws.001">'
-        content += "<user xmlns=\"\">#{@client.private_key}</user>"
-        content += "<intermediaries xmlns=\"\">#{raw_intermeds}</intermediaries>"
-        content += '</intermediarySearchRequest>'
+        output = '<intermediarySearchRequest xmlns="urn:gpsa:orias:ws.001">'
+        output += "<user xmlns=\"\">#{@client.private_key}</user>"
+        output += "<intermediaries xmlns=\"\">#{raw_intermeds}</intermediaries>"
+        output += '</intermediarySearchRequest>'
 
-        raw_body(content)
+        raw_body(output)
       end
 
       # Build the raw intermediaries list of a search
       def raw_intermediaries(type, terms)
-        raise 'Orias::Api::Search - You must at least submit one term.' if terms.empty?
+        if terms.empty?
+          raise 'Orias::Api::Search - You must at least submit one term.'
+        end
 
         type = Search.set_type(type, terms)
         terms = Search.set_terms(type, terms)
@@ -78,9 +85,10 @@ module Orias
 
           return type if VALID_INTERMEDIARIES_TYPE.key?(type)
 
-          lgts = terms.map(&:length).uniq
+          lengths = terms.map(&:length).uniq
+          length_type = VALID_INTERMEDIARIES_TYPE.invert[lengths.first]
 
-          unless lgts.length == 1 && VALID_INTERMEDIARIES_TYPE.invert[lgts.first]
+          unless lengths.length == 1 && length_type
             raise "Orias::Api::Search - Unknown Type Error (\"#{type}\")."
           end
 
@@ -89,12 +97,13 @@ module Orias
 
         # Check & Set an intermediaries list
         def set_terms(type, terms)
-          terms.map!{ |t| t.to_s.gsub(/\D/,'') }
-          lgts = terms.map(&:length).uniq
-          valid_lgth = VALID_INTERMEDIARIES_TYPE[type]
+          terms.map! { |t| t.to_s.gsub(/\D/, '') }
+          lengths = terms.map(&:length).uniq
+          valid_length = VALID_INTERMEDIARIES_TYPE[type]
 
-          unless lgts.length == 1 && lgts.first == valid_lgth
-            raise "Terms for \"#{type}\" must all have a length of #{valid_lgth}."
+          unless lengths.length == 1 && lengths.first == valid_length
+            raise "Orias::Api::Search -
+              Terms for \"#{type}\" must all have a length of #{valid_length}."
           end
 
           terms

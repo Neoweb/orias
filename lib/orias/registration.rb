@@ -3,7 +3,7 @@ module Orias
   #
   class Registration < Base
     attr_accessor :raw, :category_name, :status, :subscribed,
-      :registration_date, :deletion_date, :collect_funds, :mandators
+                  :registration_date, :deletion_date, :collect_funds, :mandators
 
     # Initialize an Orias::Registration instance
     def initialize(attributes = {})
@@ -23,9 +23,7 @@ module Orias
     private
 
     def process_raw_mandators(raw_mandators)
-      unless raw_mandators.is_a?(Array)
-        raw_mandators = [raw_mandators]
-      end
+      raw_mandators = [raw_mandators] unless raw_mandators.is_a?(Array)
 
       mandators = raw_mandators.compact.map do |h|
         Orias::Mandator.new(h)

@@ -12,8 +12,6 @@ module Orias
       @denomination = @raw.dig('denomination')
     end
 
-    private
-
     class << self
     end
   end

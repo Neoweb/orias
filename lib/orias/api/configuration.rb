@@ -4,7 +4,7 @@ module Orias
     #
     class Configuration < Base
       DEFAULT_API_ENDPOINT = 'https://ws.orias.fr/service?wsdl'.freeze
-      DEFAULT_PER_REQUEST = 1000.freeze
+      DEFAULT_PER_REQUEST = 1000
 
       attr_accessor :private_key, :api_endpoint, :per_request
 

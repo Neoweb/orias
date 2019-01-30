@@ -4,7 +4,7 @@ module Orias
   class Intermediary < Base
     attr_accessor :raw, :found, :siren, :orias, :denomination, :registrations
 
-    alias_method :registration_number, :orias
+    alias registration_number orias
 
     # Initialize an Orias::Intermediary instance
     def initialize(attributes = {})
