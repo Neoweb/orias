@@ -25,7 +25,7 @@ module Orias
     end
 
     def subscribed
-      !@registrations.with_status('INSCRIT').empty?
+      @registrations.where(status: 'INSCRIT').any?
     end
 
     private

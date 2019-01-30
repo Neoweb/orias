@@ -18,6 +18,23 @@ module Orias
       @all.each(&block)
     end
 
+    def where(attributes = {})
+      self.class.new(
+        @all.reject do |element|
+          attributes.map do |key, expected_value|
+            where_element_attribute(element, key, expected_value)
+          end.include?(false)
+        end
+      )
+    end
+
+    def where_element_attribute(element, key, value)
+      return element.send(key).where(value).count >= 1 if value.is_a?(Hash)
+
+      value = [value] unless value.is_a?(Array)
+      value.include?(element.send(key.to_sym))
+    end
+
     class << self
       def merge(instances)
         new(instances.map(&:all).flatten.compact)
