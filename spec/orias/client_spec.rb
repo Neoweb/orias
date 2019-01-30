@@ -1,2 +1,2 @@
-RSpec.describe Orias::Client, type: :class do
+RSpec.describe Orias::Api::Client, type: :class do
 end

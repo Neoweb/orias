@@ -1,13 +1,20 @@
+require 'libxml_to_hash'
+
 require 'orias/base'
 require 'orias/version'
-require 'orias/configuration'
-require 'orias/request'
-require 'orias/client'
-require 'orias/search'
-require 'orias/response'
+
+require 'orias/api/configuration'
+require 'orias/api/request'
+require 'orias/api/client'
+require 'orias/api/search'
+require 'orias/api/response'
+
 require 'orias/intermediary'
 require 'orias/registration'
 require 'orias/mandator'
+
+require 'orias/collection/base'
+require 'orias/collection/registration'
 
 # Top-level of the orias ruby gem.
 #
@@ -16,12 +23,12 @@ module Orias
     attr_writer :configuration
   end
 
-  # Orias::Configuration instance accessor
+  # Orias::Api::Configuration instance accessor
   def self.configuration
-    @configuration ||= Configuration.new
+    @configuration ||= Api::Configuration.new
   end
 
-  # Orias::Configuration instance builder
+  # Orias::Api::Configuration instance builder
   def self.configure
     yield(configuration)
   end

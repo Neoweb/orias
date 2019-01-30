@@ -1,8 +1,8 @@
-RSpec.describe Orias::Request, type: :class do
+RSpec.describe Orias::Api::Request, type: :class do
   describe '#build!' do
     endpoint = Faker::Internet.url
     uri_endpoint = URI(endpoint)
-    request = Orias::Request.new(api_endpoint: endpoint)
+    request = Orias::Api::Request.new(api_endpoint: endpoint)
     request.build!
 
     it 'define the #post value' do
@@ -23,7 +23,7 @@ RSpec.describe Orias::Request, type: :class do
     end
 
     context 'when #body is empty' do
-      request = Orias::Request.new(body: nil)
+      request = Orias::Api::Request.new(body: nil)
       response = request.response
 
       it 'returns an HTTPInternalServerError' do

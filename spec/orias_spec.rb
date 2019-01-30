@@ -4,7 +4,7 @@ RSpec.describe Orias do
   end
 
   describe '#configure' do
-    it 'build an Orias::Configuration' do
+    it 'build an Orias::Api::Configuration' do
       valid_key = Faker::String.random(20)
 
       Orias.configure do |conf|
