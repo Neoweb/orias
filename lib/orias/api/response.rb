@@ -1,3 +1,5 @@
+require 'orias/base'
+
 module Orias
   module Api
     # Dedicated to search response handling

@@ -1,3 +1,6 @@
+require 'orias/base'
+require 'orias/collection/registration'
+
 module Orias
   # Dedicated to Orias registrations objects handling
   #

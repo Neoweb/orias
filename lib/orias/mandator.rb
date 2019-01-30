@@ -1,3 +1,6 @@
+require 'orias/base'
+require 'orias/collection/mandator'
+
 module Orias
   # Dedicated to Orias mandators objects handling
   #

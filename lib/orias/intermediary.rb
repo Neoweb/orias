@@ -1,3 +1,6 @@
+require 'orias/base'
+require 'orias/collection/intermediary'
+
 module Orias
   # Dedicated to Orias intermediaries objects handling
   #

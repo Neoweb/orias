@@ -1,4 +1,5 @@
 require 'net/http'
+require 'orias/base'
 
 module Orias
   module Api

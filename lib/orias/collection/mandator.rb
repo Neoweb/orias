@@ -1,3 +1,5 @@
+require 'orias/collection/base'
+
 module Orias
   # Dedicated to Orias::Mandator collections handling
   #
