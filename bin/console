@@ -5,8 +5,8 @@ require 'orias'
 
 require 'irb'
 
-Orias.configure{ |c| c.private_key = ENV['ORIAS_KEY'] }
-@sirens = %w(313116881 497670687 414812610 123456789)
+Orias.configure { |c| c.private_key = ENV['ORIAS_KEY'] }
+@sirens = %w[313116881 497670687 414812610 123456789]
 @search_response = Orias::Api::Search.new.find_by_siren(@sirens)
 
 puts '——————————'

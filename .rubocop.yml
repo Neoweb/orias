@@ -3,3 +3,7 @@ Metrics/BlockLength:
     - 'Rakefile'
     - '**/*.rake'
     - 'spec/**/*.rb'
+    - '*.gemspec'
+
+AllCops:
+  TargetRubyVersion: 2.2.0
