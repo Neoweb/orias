@@ -17,16 +17,21 @@ module Orias
       @collect_funds = @raw.dig('collectFunds') == 'true'
 
       raw_mandators = @raw.dig('mandators', 'mandator')
+      @mandators = process_raw_mandators(raw_mandators)
+    end
+
+    private
+
+    def process_raw_mandators(raw_mandators)
       unless raw_mandators.is_a?(Array)
         raw_mandators = [raw_mandators]
       end
 
-      @mandators = raw_mandators.compact.map do |h|
+      mandators = raw_mandators.compact.map do |h|
         Orias::Mandator.new(h)
       end
+      Orias::MandatorCollection.new(mandators)
     end
-
-    private
 
     class << self
     end

@@ -18,15 +18,7 @@ module Orias
       @denomination = base.dig('denomination')
 
       raw_registrations = @raw.dig('registrations', 'registration')
-      unless raw_registrations.is_a?(Array)
-        raw_registrations = [raw_registrations]
-      end
-
-      registrations = raw_registrations.compact.map do |h|
-        Orias::Registration.new(h)
-      end
-
-      @registrations = Orias::RegistrationCollection.new(registrations)
+      @registrations = process_raw_registrations(raw_registrations)
     end
 
     def subscribed
@@ -34,6 +26,17 @@ module Orias
     end
 
     private
+
+    def process_raw_registrations(raw_registrations)
+      unless raw_registrations.is_a?(Array)
+        raw_registrations = [raw_registrations]
+      end
+
+      registrations = raw_registrations.compact.map do |h|
+        Orias::Registration.new(h)
+      end
+      Orias::RegistrationCollection.new(registrations)
+    end
 
     class << self
     end

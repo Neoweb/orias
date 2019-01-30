@@ -15,6 +15,7 @@ require 'orias/mandator'
 
 require 'orias/collection/base'
 require 'orias/collection/registration'
+require 'orias/collection/mandator'
 
 # Top-level of the orias ruby gem.
 #
