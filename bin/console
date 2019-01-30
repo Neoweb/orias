@@ -4,4 +4,20 @@ require 'bundler/setup'
 require 'orias'
 
 require 'irb'
+
+Orias.configure{ |c| c.private_key = ENV['ORIAS_KEY'] }
+@sirens = ['313116881', '497670687', '414812610', '123456789']
+@search_response = Orias::Search.new.find_by_siren(@sirens)
+
+puts '——————————'
+puts "ENV['ORIAS_KEY']"
+puts ENV['ORIAS_KEY']
+puts '——————————'
+puts '@sirens'
+puts @sirens
+puts '——————————'
+puts '@search_response'
+puts @search_response
+puts '——————————'
+
 IRB.start(__FILE__)

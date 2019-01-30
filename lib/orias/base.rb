@@ -23,6 +23,8 @@ module Orias
   end
 
   class CollectionBase
+    include Enumerable
+
     attr_accessor :all
 
     def self.target_class
@@ -34,12 +36,8 @@ module Orias
       check_collection_classes!
     end
 
-    def to_a
-      all
-    end
-
-    def count
-      all.length
+    def each &block
+      @all.each(&block)
     end
 
     protected
@@ -47,8 +45,10 @@ module Orias
     def check_collection_classes!
       if self.class.target_class.nil?
         raise "Orias Collection - No target_class defined"
-      elsif !all.map(&:class).uniq.empty? && all.map(&:class).uniq != [self.class.target_class]
-        puts "#{all.map(&:class).uniq} != #{[self.class.target_class]} -> true"
+      end
+
+      all_classes = all.map(&:class).uniq
+      if !all_classes.empty? && all_classes != [self.class.target_class]
         raise "Orias Collection - wrong class included in all"
       end
     end
