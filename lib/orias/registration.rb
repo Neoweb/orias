@@ -1,5 +1,4 @@
 require 'orias/base'
-require 'orias/collection/registration'
 
 module Orias
   # Dedicated to Orias registrations objects handling
@@ -35,6 +34,14 @@ module Orias
     end
 
     class << self
+    end
+  end
+
+  # Dedicated to Orias::Registration collections handling
+  #
+  class RegistrationCollection < CollectionBase
+    def self.target_class
+      Orias::Registration
     end
   end
 end

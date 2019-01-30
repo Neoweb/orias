@@ -1,5 +1,4 @@
 require 'orias/base'
-require 'orias/collection/mandator'
 
 module Orias
   # Dedicated to Orias mandators objects handling
@@ -16,6 +15,14 @@ module Orias
     end
 
     class << self
+    end
+  end
+
+  # Dedicated to Orias::Mandator collections handling
+  #
+  class MandatorCollection < CollectionBase
+    def self.target_class
+      Orias::Mandator
     end
   end
 end

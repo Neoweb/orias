@@ -1,3 +1,5 @@
+require 'orias/collection_base'
+
 module Orias
   # Base Orias class
   #
