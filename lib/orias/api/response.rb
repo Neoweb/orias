@@ -95,9 +95,10 @@ module Orias
           raise 'Orias::Api::Response - API response error.' unless results_hash
         end
 
-        @results = [results_hash].flatten.map do |h|
+        intermediaries = [results_hash].flatten.map do |h|
           Orias::Intermediary.new(h)
         end
+        @results = Orias::IntermediaryCollection.new(intermediaries)
 
         self
       end

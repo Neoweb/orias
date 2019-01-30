@@ -14,6 +14,7 @@ require 'orias/registration'
 require 'orias/mandator'
 
 require 'orias/collection/base'
+require 'orias/collection/intermediary'
 require 'orias/collection/registration'
 require 'orias/collection/mandator'
 
