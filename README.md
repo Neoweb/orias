@@ -34,12 +34,18 @@ Or install it yourself as:
 
 ## TODO
 
-- Improved collections management (find / where / order methods & file structure)
 - Improved error handling
 - Stable version
 - Correct spec coverage (90+)
 - Complete documentation / usage wiki _in english_
 - Complete documentation / usage wiki _in french_
+
+
+## DONE
+
+- Improved collections management
+  - where
+  - order
 
 
 ## Contributing

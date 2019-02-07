@@ -12,7 +12,7 @@ module Orias
     def initialize(attributes = {})
       @raw = attributes
 
-      base = @raw.dig('informationBase')
+      base = @raw.dig('informationBase') || {}
 
       @found = base.dig('foundInRegistry') == 'true'
       @siren = base.dig('siren')

@@ -18,6 +18,8 @@ module Orias
       @all.each(&block)
     end
 
+    # where
+
     def where(attributes = {})
       self.class.new(
         @all.reject do |element|
@@ -33,6 +35,16 @@ module Orias
 
       value = [value] unless value.is_a?(Array)
       value.include?(element.send(key.to_sym))
+    end
+
+    # order
+
+    def order(attribute)
+      unless self.class.target_class.new.methods.include?(attribute)
+        raise "Orias Collection - Unknown method \"#{attribute}\" for order"
+      end
+
+      self.class.new(@all.sort_by(&attribute.to_sym))
     end
 
     class << self
