@@ -68,9 +68,7 @@ module Orias
 
       # Build the raw intermediaries list of a search
       def raw_intermediaries(type, terms)
-        if terms.empty?
-          raise 'Orias::Api::Search - You must at least submit one term.'
-        end
+        raise Orias::Error::SearchTermsEmpty if terms.empty?
 
         type = Search.set_type(type, terms)
         terms = Search.set_terms(type, terms)
@@ -91,7 +89,7 @@ module Orias
           length_type = VALID_INTERMEDIARIES_TYPE.invert[lengths.first]
 
           unless lengths.length == 1 && length_type
-            raise "Orias::Api::Search - Unknown Type Error (\"#{type}\")."
+            raise Orias::Error::SearchTypeInvalid
           end
 
           VALID_INTERMEDIARIES_TYPE.invert[lgts.first]
@@ -104,8 +102,7 @@ module Orias
           valid_length = VALID_INTERMEDIARIES_TYPE[type]
 
           unless lengths.length == 1 && lengths.first == valid_length
-            raise "Orias::Api::Search -
-              Terms for \"#{type}\" must all have a length of #{valid_length}."
+            raise Orias::Error::WrongSearchTermLength
           end
 
           terms

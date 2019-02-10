@@ -18,8 +18,7 @@ module Orias
       end
 
       def check_validations!
-        no_pvt_key_error = 'Orias::Client - private_key is not valid.'
-        raise no_pvt_key_error unless valid_private_key?
+        raise Orias::Error::ClientPrivateKeyInvalid unless valid_private_key?
 
         true
       end

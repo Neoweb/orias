@@ -34,7 +34,6 @@ Or install it yourself as:
 
 ## TODO
 
-- Improved error handling
 - Stable version
 - Multiple ruby versions support
 - Strict dependencies minimal version requirement (for devs to)
@@ -47,6 +46,7 @@ Or install it yourself as:
 ## DONE
 
 - Improved collections management (w/ where & order)
+- Improved error handling
 
 
 ## Contributing

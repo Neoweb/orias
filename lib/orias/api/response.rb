@@ -53,8 +53,7 @@ module Orias
       class << self
         def merge(all)
           if all.map(&:type).uniq.compact.length != 1
-            raise 'Orias::Api::Response -
-              Error merging Orias::Api::Response collection.'
+            raise Orias::Error::ResponseMergeImpossible
           end
 
           new(
@@ -83,7 +82,7 @@ module Orias
       end
 
       def check_type
-        raise 'Orias::Api::Response - Wrong type.' unless valid_type?
+        raise(Orias::Error::ResponseTypeInvalid, type) unless valid_type?
       end
 
       private
@@ -91,7 +90,7 @@ module Orias
       def process_intermediary_search!
         results_hash = raw_hash.dig('intermediarySearchResponse')
         results_hash = results_hash.dig('intermediaries', 'intermediary')
-        raise 'Orias::Api::Response - API response error.' unless results_hash
+        raise Orias::Error::ResponseUnreadable unless results_hash
 
         intermediaries = [results_hash].flatten.map do |h|
           Orias::Intermediary.new(h)

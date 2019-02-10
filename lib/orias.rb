@@ -2,6 +2,7 @@ require 'libxml_to_hash'
 
 require 'orias/version'
 require 'orias/api'
+require 'orias/error'
 
 require 'orias/intermediary'
 require 'orias/registration'

@@ -41,7 +41,7 @@ module Orias
 
     def order(attribute)
       unless self.class.target_class.new.methods.include?(attribute)
-        raise "Orias Collection - Unknown method \"#{attribute}\" for order"
+        raise Orias::Error::CollectionInvalidOrderAttribute, attribute
       end
 
       self.class.new(@all.sort_by(&attribute.to_sym))
@@ -57,12 +57,10 @@ module Orias
 
     def check_collection_classes!
       if self.class.target_class.nil?
-        raise 'Orias Collection - No target_class defined'
+        raise Orias::Error::CollectionUndefinedTargetClass
       end
 
-      unless all_classes_valid?
-        raise 'Orias Collection - wrong class included in all'
-      end
+      raise Orias::Error::CollectionMultipleClasses unless all_classes_valid?
 
       true
     end
