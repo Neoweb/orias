@@ -36,6 +36,9 @@ Or install it yourself as:
 
 - Improved error handling
 - Stable version
+- Multiple ruby versions support
+- Strict dependencies minimal version requirement (for devs to)
+- Fix spec coverage %age
 - Correct spec coverage (90+)
 - Complete documentation / usage wiki _in english_
 - Complete documentation / usage wiki _in french_
@@ -43,9 +46,7 @@ Or install it yourself as:
 
 ## DONE
 
-- Improved collections management
-  - where
-  - order
+- Improved collections management (w/ where & order)
 
 
 ## Contributing
