@@ -28,13 +28,13 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.2.0'
 
-  spec.add_runtime_dependency('libxml-to-hash')
+  spec.add_runtime_dependency('libxml-to-hash', '~> 0.2')
 
   spec.add_development_dependency('bundler', '~> 1.16')
   spec.add_development_dependency('faker', '~> 1.9')
   spec.add_development_dependency('rake', '~> 10.0')
   spec.add_development_dependency('rspec', '~> 3.0')
-  spec.add_development_dependency('rubocop')
-  spec.add_development_dependency('simplecov')
-  spec.add_development_dependency('simplecov-console')
+  spec.add_development_dependency('rubocop', '>= 0.62')
+  spec.add_development_dependency('simplecov', '~> 0.16')
+  spec.add_development_dependency('simplecov-console', '~> 0.4')
 end
