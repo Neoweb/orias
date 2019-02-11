@@ -18,7 +18,6 @@ ORIAS in the french organism in charge of registering insurance, banking and fin
 ## Installation
 
 Add this line to your application's Gemfile:
-
 ```ruby
 gem 'orias'
 ```
@@ -32,21 +31,9 @@ Or install it yourself as:
     $ gem install orias
 
 
-## TODO
+## FAQ
 
-- Stable version
-- Multiple ruby versions support
-- Strict dependencies minimal version requirement (for devs to)
-- Fix spec coverage %age
-- Correct spec coverage (90+)
-- Complete documentation / usage wiki _in english_
-- Complete documentation / usage wiki _in french_
-
-
-## DONE
-
-- Improved collections management (w/ where & order)
-- Improved error handling
+_See the [FAQ.md](FAQ.md) dedicated file_
 
 
 ## Contributing
