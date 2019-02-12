@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'orias/error/base'
 require 'orias/error/client'
 require 'orias/error/collection'

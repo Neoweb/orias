@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Orias::Api::Client, type: :class do
   # private_key
 

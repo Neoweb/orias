@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'orias/api/configuration'
 require 'orias/api/request'
 require 'orias/api/client'

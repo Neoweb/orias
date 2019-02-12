@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'libxml_to_hash'
 
 require 'orias/version'

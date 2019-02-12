@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Orias::Api::Configuration, type: :class do
   describe '#api_endpoint' do
     it 'has a default value of "https://ws.orias.fr/service?wsdl"' do
