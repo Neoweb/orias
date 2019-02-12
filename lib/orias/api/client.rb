@@ -5,15 +5,19 @@ module Orias
     # Dedicated to request handling to ORIAS API
     #
     class Client < Base
-      attr_accessor :api_endpoint, :per_request, :private_key
+      attr_reader   :private_key
+      attr_accessor :api_endpoint, :per_request
 
       # Initialize an Orias::Api::Client instance
       def initialize(attributes = {})
         super
-        @api_endpoint ||= Orias.configuration.api_endpoint
-        @per_request ||= Orias.configuration.per_request
-        @private_key ||= Orias.configuration.private_key
+        self.api_endpoint ||= Orias.configuration.api_endpoint
+        self.per_request ||= Orias.configuration.per_request
+        self.private_key ||= Orias.configuration.private_key
+      end
 
+      def private_key=(value)
+        @private_key = value
         check_validations!
       end
 
@@ -24,7 +28,7 @@ module Orias
       end
 
       def valid_private_key?
-        !@private_key.to_s.empty?
+        !private_key.to_s.empty?
       end
     end
   end

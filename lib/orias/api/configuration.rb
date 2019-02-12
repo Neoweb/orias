@@ -13,8 +13,8 @@ module Orias
       # Initialize an Orias::Api::Configuration instance
       def initialize(attributes = {})
         super
-        @api_endpoint ||= DEFAULT_API_ENDPOINT
-        @per_request ||= DEFAULT_PER_REQUEST
+        self.api_endpoint ||= DEFAULT_API_ENDPOINT
+        self.per_request ||= DEFAULT_PER_REQUEST
       end
     end
   end

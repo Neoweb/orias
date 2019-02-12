@@ -20,7 +20,7 @@ module Orias
 
       %i[found subscribed].each do |result_attr|
         define_method(result_attr) do |attr_value = true|
-          if @type == :intermediary_search
+          if type == :intermediary_search
             return send("#{result_attr}_intermediaries".to_sym, attr_value)
           end
 
@@ -70,7 +70,7 @@ module Orias
       def process_raw_response!
         self.raw_hash = Hash.from_libxml(raw)['Envelope']['Body']
 
-        if @type == :intermediary_search
+        if type == :intermediary_search
           process_intermediary_search!
         else
           self
@@ -95,7 +95,7 @@ module Orias
         intermediaries = [results_hash].flatten.map do |h|
           Orias::Intermediary.new(h)
         end
-        @results = Orias::IntermediaryCollection.new(intermediaries)
+        self.results = Orias::IntermediaryCollection.new(intermediaries)
 
         self
       end

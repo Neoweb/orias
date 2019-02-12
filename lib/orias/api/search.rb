@@ -12,7 +12,7 @@ module Orias
       # Initialize an Orias::Api::Search instance
       def initialize(attributes = {})
         super
-        @client ||= Orias::Api::Client.new
+        self.client ||= Orias::Api::Client.new
       end
 
       # Alias for #find_by with an :orias type
@@ -27,7 +27,7 @@ module Orias
 
       # Request building for intermediarySearchRequest
       def find_by(type, terms)
-        term_collections = [terms].flatten.each_slice(@client.per_request)
+        term_collections = [terms].flatten.each_slice(self.client.per_request)
         responses = term_collections.map do |term_collection|
           request = build_find_request(type, term_collection)
 
@@ -42,7 +42,7 @@ module Orias
 
       def build_find_request(type, term_collection)
         Orias::Api::Request.new(
-          api_endpoint: @client.api_endpoint,
+          api_endpoint: self.client.api_endpoint,
           body: raw_find(raw_intermediaries(type, term_collection))
         ).build!
       end
@@ -59,7 +59,7 @@ module Orias
       # Build the raw search request of a search
       def raw_find(raw_intermeds)
         output = '<intermediarySearchRequest xmlns="urn:gpsa:orias:ws.001">'
-        output += "<user xmlns=\"\">#{@client.private_key}</user>"
+        output += "<user xmlns=\"\">#{self.client.private_key}</user>"
         output += "<intermediaries xmlns=\"\">#{raw_intermeds}</intermediaries>"
         output += '</intermediarySearchRequest>'
 

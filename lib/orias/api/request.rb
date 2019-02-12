@@ -12,19 +12,19 @@ module Orias
       # Initialize an Orias::Api::Request instance
       def initialize(attributes = {})
         super
-        @api_endpoint ||= Orias.configuration.api_endpoint
+        self.api_endpoint ||= Orias.configuration.api_endpoint
       end
 
       # Build the request to be sent
       def build!
-        @uri = URI(@api_endpoint)
+        @uri = URI(self.api_endpoint)
 
         @post = Net::HTTP::Post.new(uri)
-        @post.body = @body
+        @post.body = body
         @post['Content-Type'] = 'application/xml'
 
         @http = Net::HTTP.new(uri.host, uri.port)
-        @http.use_ssl = true
+        http.use_ssl = true
 
         self
       end

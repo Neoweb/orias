@@ -1,23 +1,6 @@
-require 'simplecov'
-require 'bundler/setup'
 require 'orias'
 require 'faker'
-require 'simplecov-console'
-
-# SimpleCov.formatter = SimpleCov::Formatter::Console
-SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
-
-SimpleCov.profiles.define :gem do
-  track_files 'lib/**/*.rb'
-
-  add_group 'Api', 'lib/orias/api'
-
-  add_filter 'spec'
-  add_filter 'lib/orias/error'
-  add_filter 'lib/orias/api.rb'
-end
-
-SimpleCov.start :gem
+require 'simplecov'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
