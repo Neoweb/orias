@@ -22,7 +22,7 @@ RSpec.describe Orias::Api::Client, type: :class do
 
   describe '#private_key=' do
     it 'set the #private_key value' do
-      valid_key = Faker::String.random(20)
+      valid_key = Faker::Number.number(20)
 
       client = Orias::Api::Client.new(private_key: 'tmp')
       client.private_key = valid_key

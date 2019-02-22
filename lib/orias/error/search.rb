@@ -22,8 +22,8 @@ module Orias
     #
     class WrongSearchTermLength < RuntimeError
       def message
-        op = 'All terms must have the right length for the Search type'
-        op + " (#{Orias::Api::Search::VALID_INTERMEDIARIES_TYPE})."
+        op = 'All terms must have the right length of numbers '
+        op + "for the Search type (#{Orias::Api::Search::VALID_TYPES})."
       end
     end
   end

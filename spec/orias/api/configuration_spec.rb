@@ -28,7 +28,7 @@ RSpec.describe Orias::Api::Configuration, type: :class do
 
   describe '#private_key=' do
     it 'set the #private_key value' do
-      valid_key = Faker::String.random(20)
+      valid_key = Faker::Number.number(20)
 
       config = Orias::Api::Configuration.new
       config.private_key = valid_key

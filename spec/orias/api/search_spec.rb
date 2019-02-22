@@ -5,6 +5,12 @@ RSpec.describe Orias::Api::Search, type: :class do
   valid_client = Orias::Api::Client.new(private_key: valid_private_key)
   valid_search = Orias::Api::Search.new(client: valid_client)
 
+  valid_types = Orias::Api::Search::VALID_TYPES
+  valid_type_key = Orias::Api::Search::VALID_TYPES.keys.sample
+  valid_type_values = (0..5).map do |i|
+    Faker::Number.number(valid_types[valid_type_key])
+  end
+
   # client
   describe '#client' do
     context 'when no client is submitted on initialization' do
@@ -34,6 +40,18 @@ RSpec.describe Orias::Api::Search, type: :class do
       expected_body += '</soapenv:Envelope>'
 
       expect(valid_search.raw_body(random_content)).to eq(expected_body)
+    end
+  end
+
+  # find_by
+  describe '#find_by' do
+    context 'when no client is submitted on initialization' do
+      it 'returns a response' do
+        pending('Stub API response.')
+        # expect(valid_search.find_by(valid_type_key, valid_type_values)).to(
+        #   be_a(Orias::Api::Response)
+        # )
+      end
     end
   end
 end

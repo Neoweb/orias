@@ -1,5 +1,7 @@
 ## TODO
 
+- Rewrite Api::Search to transform find_by* methods in class methods
+- Implement WebMock for Specs
 - Correct spec coverage (90+)
 - Clean attr_accessor / attr_reader / global usage
 - Set dependencies to their minimal version required (for devs to)

@@ -7,7 +7,7 @@ module Orias
     # Dedicated to search request building
     #
     class Search < Base
-      VALID_INTERMEDIARIES_TYPE = { siren: 9, registrationNumber: 8 }.freeze
+      VALID_TYPES = { siren: 9, registrationNumber: 8 }.freeze
 
       attr_accessor :client
 
@@ -85,23 +85,23 @@ module Orias
         def set_type(type, terms)
           type = :registrationNumber if type == :orias
 
-          return type if VALID_INTERMEDIARIES_TYPE.key?(type)
+          return type if VALID_TYPES.key?(type)
 
           lengths = terms.map(&:length).uniq
-          length_type = VALID_INTERMEDIARIES_TYPE.invert[lengths.first]
+          length_type = VALID_TYPES.invert[lengths.first]
 
           unless lengths.length == 1 && length_type
             raise Orias::Error::SearchTypeInvalid
           end
 
-          VALID_INTERMEDIARIES_TYPE.invert[lgts.first]
+          VALID_TYPES.invert[lgts.first]
         end
 
         # Check & Set an intermediaries list
         def set_terms(type, terms)
           terms.map! { |t| t.to_s.gsub(/\D/, '') }
           lengths = terms.map(&:length).uniq
-          valid_length = VALID_INTERMEDIARIES_TYPE[type]
+          valid_length = VALID_TYPES[type]
 
           unless lengths.length == 1 && lengths.first == valid_length
             raise Orias::Error::WrongSearchTermLength
