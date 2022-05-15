@@ -6,4 +6,5 @@ Metrics/BlockLength:
     - '*.gemspec'
 
 AllCops:
-  TargetRubyVersion: 2.4.0
+  TargetRubyVersion: 2.7.0
+  SuggestExtensions: false

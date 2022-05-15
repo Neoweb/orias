@@ -28,17 +28,17 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '>= 2.4.0'
+  spec.required_ruby_version = '>= 2.7.0'
 
   spec.add_runtime_dependency('libxml-to-hash', '~> 0.2')
 
-  spec.add_development_dependency('bundler', '~> 1.16')
-  spec.add_development_dependency('factory_bot_rails', '~> 5.0')
-  spec.add_development_dependency('faker', '~> 1.9')
-  spec.add_development_dependency('rake', '~> 10.0')
-  spec.add_development_dependency('rspec', '~> 3.0')
-  spec.add_development_dependency('rubocop', '>= 0.62')
-  spec.add_development_dependency('simplecov', '~> 0.16')
-  spec.add_development_dependency('simplecov-console', '~> 0.4')
-  spec.add_development_dependency('webmock', '~> 3.5')
+  spec.add_development_dependency('bundler', '~> 2.3')
+  spec.add_development_dependency('factory_bot_rails', '~> 6.2')
+  spec.add_development_dependency('faker', '~> 2.20')
+  spec.add_development_dependency('rake', '~> 13.0')
+  spec.add_development_dependency('rspec', '~> 3.11')
+  spec.add_development_dependency('rubocop', '~> 1.29')
+  spec.add_development_dependency('simplecov', '~> 0.21')
+  spec.add_development_dependency('simplecov-console', '~> 0.9')
+  spec.add_development_dependency('webmock', '~> 3.14')
 end

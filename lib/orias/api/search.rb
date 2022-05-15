@@ -55,7 +55,7 @@ module Orias
 
         output = "<soapenv:Envelope xmlns:soapenv=\"#{xmlns_url}\">"
         output += "<soapenv:Body>#{content}</soapenv:Body>"
-        output + '</soapenv:Envelope>'
+        "#{output}</soapenv:Envelope>"
       end
 
       # Build the raw search request of a search
@@ -90,9 +90,7 @@ module Orias
           lengths = terms.map(&:length).uniq
           length_type = VALID_TYPES.invert[lengths.first]
 
-          unless lengths.length == 1 && length_type
-            raise Orias::Error::SearchTypeInvalid
-          end
+          raise Orias::Error::SearchTypeInvalid unless lengths.length == 1 && length_type
 
           VALID_TYPES.invert[lgts.first]
         end
@@ -103,9 +101,7 @@ module Orias
           lengths = terms.map(&:length).uniq
           valid_length = VALID_TYPES[type]
 
-          unless lengths.length == 1 && lengths.first == valid_length
-            raise Orias::Error::WrongSearchTermLength
-          end
+          raise Orias::Error::WrongSearchTermLength unless lengths.length == 1 && lengths.first == valid_length
 
           terms
         end

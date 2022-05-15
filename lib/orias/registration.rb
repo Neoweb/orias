@@ -13,12 +13,12 @@ module Orias
     def initialize(attributes = {})
       @raw = attributes
 
-      @category_name = @raw.dig('categoryName')
-      @status = @raw.dig('status')
+      @category_name = @raw['categoryName']
+      @status = @raw['status']
       @subscribed = @status == 'INSCRIT'
-      @registration_date = @raw.dig('registrationDate')
-      @deletion_date = @raw.dig('deletionDate')
-      @collect_funds = @raw.dig('collectFunds') == 'true'
+      @registration_date = @raw['registrationDate']
+      @deletion_date = @raw['deletionDate']
+      @collect_funds = @raw['collectFunds'] == 'true'
 
       raw_mandators = @raw.dig('mandators', 'mandator')
       @mandators = process_raw_mandators(raw_mandators)

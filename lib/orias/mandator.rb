@@ -12,8 +12,8 @@ module Orias
     def initialize(attributes = {})
       @raw = attributes
 
-      @siren = @raw.dig('siren')
-      @denomination = @raw.dig('denomination')
+      @siren = @raw['siren']
+      @denomination = @raw['denomination']
     end
 
     class << self

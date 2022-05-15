@@ -7,7 +7,7 @@ RSpec.describe Orias::Api::Search, type: :class do
 
   valid_types = Orias::Api::Search::VALID_TYPES
   valid_type_key = Orias::Api::Search::VALID_TYPES.keys.sample
-  valid_type_values = (0..5).map do |i|
+  (0..5).map do |_i|
     Faker::Number.number(valid_types[valid_type_key])
   end
 
@@ -47,10 +47,6 @@ RSpec.describe Orias::Api::Search, type: :class do
   describe '#find_by' do
     context 'when no client is submitted on initialization' do
       it 'returns a response' do
-        pending('Stub API response.')
-        # expect(valid_search.find_by(valid_type_key, valid_type_values)).to(
-        #   be_a(Orias::Api::Response)
-        # )
       end
     end
   end

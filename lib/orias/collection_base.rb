@@ -58,9 +58,7 @@ module Orias
     protected
 
     def check_collection_classes!
-      if self.class.target_class.nil?
-        raise Orias::Error::CollectionUndefinedTargetClass
-      end
+      raise Orias::Error::CollectionUndefinedTargetClass if self.class.target_class.nil?
 
       raise Orias::Error::CollectionMultipleClasses unless all_classes_valid?
 

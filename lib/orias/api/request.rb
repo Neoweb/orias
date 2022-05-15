@@ -26,7 +26,8 @@ module Orias
         @post['Content-Type'] = 'application/xml'
 
         @http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = true
+        @http.use_ssl = true
+        @http.read_timeout = 600
 
         self
       end

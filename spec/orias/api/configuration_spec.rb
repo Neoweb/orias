@@ -2,9 +2,9 @@
 
 RSpec.describe Orias::Api::Configuration, type: :class do
   describe '#api_endpoint' do
-    it 'has a default value of "https://ws.orias.fr/service?wsdl"' do
+    it 'has a default value of "https://ws.orias.fr/ws/service/?wsdl"' do
       config = Orias::Api::Configuration.new
-      expect(config.api_endpoint).to eq('https://ws.orias.fr/service?wsdl')
+      expect(config.api_endpoint).to eq('https://ws.orias.fr/ws/service/?wsdl')
     end
   end
 

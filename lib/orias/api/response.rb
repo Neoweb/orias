@@ -22,9 +22,7 @@ module Orias
 
       %i[found subscribed].each do |result_attr|
         define_method(result_attr) do |attr_value = true|
-          if type == :intermediary_search
-            return send("#{result_attr}_intermediaries".to_sym, attr_value)
-          end
+          return send("#{result_attr}_intermediaries".to_sym, attr_value) if type == :intermediary_search
 
           []
         end
@@ -54,9 +52,7 @@ module Orias
 
       class << self
         def merge(all)
-          if all.map(&:type).uniq.compact.length != 1
-            raise Orias::Error::ResponseMergeImpossible
-          end
+          raise Orias::Error::ResponseMergeImpossible if all.map(&:type).uniq.compact.length != 1
 
           new(
             raw: all.map(&:raw),
@@ -90,7 +86,7 @@ module Orias
       private
 
       def process_intermediary_search!
-        results_hash = raw_hash.dig('intermediarySearchResponse')
+        results_hash = raw_hash['intermediarySearchResponse']
         results_hash = results_hash.dig('intermediaries', 'intermediary')
         raise Orias::Error::ResponseUnreadable unless results_hash
 
